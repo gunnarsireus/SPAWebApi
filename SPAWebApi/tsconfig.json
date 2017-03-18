@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "outDir": "./Scripts/",
+    "outDir": "./Scripts",
     "sourceMap": true,
     "noImplicitAny": true,
     "module": "commonjs",
