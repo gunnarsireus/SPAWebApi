@@ -1,7 +1,7 @@
 ﻿import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as $ from "jquery";
-import '../../jquery-ui.js';
+import '../../../node_modules/jquery-ui/ui/widgets/dialog';
 
 export interface IAlertProp {
     text: string;
