@@ -2,7 +2,6 @@
 import * as ReactDOM from "react-dom";
 import * as $ from "jquery";
 import '../../jquery-ui.js';
-import '../../jquery-ui.css';
 
 export interface IAlertProp {
     text: string;

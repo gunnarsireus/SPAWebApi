@@ -14,7 +14,6 @@ var React = require("react");
 var ReactDOM = require("react-dom");
 var $ = require("jquery");
 require("../../jquery-ui.js");
-require("../../jquery-ui.css");
 var DangerAlert = (function (_super) {
     __extends(DangerAlert, _super);
     function DangerAlert(props) {
