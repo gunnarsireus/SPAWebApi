@@ -3,7 +3,7 @@ var path = require('path');
 var WebpackNotifierPlugin = require('webpack-notifier');
 
 module.exports = {
-    context: path.join(__dirname, 'Scripts'),
+    context: path.join(__dirname, 'Scripts/src'),
     entry: './index.js',
     output: {
         path: path.join(__dirname, 'Build'),

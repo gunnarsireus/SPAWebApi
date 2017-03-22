@@ -312,7 +312,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\src\components\alert.tsx" />
     <TypeScriptCompile Include="Scripts\src\components\well.tsx" />
-    <TypeScriptCompile Include="Scripts\index.tsx" />
+    <TypeScriptCompile Include="Scripts\src\index.tsx" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
