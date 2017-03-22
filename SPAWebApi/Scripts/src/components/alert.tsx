@@ -58,7 +58,7 @@ export class DialogAlert extends React.Component<IDialogProp, {}> {
         var node: Element = ReactDOM.findDOMNode(this);
         var dialog: JQueryUI.Dialog = $(node).dialog({
             modal: true,
-            title: 'Felmeddelande:',
+            title: 'Message:',
             buttons: {
                 Ok: function () {
                     $(this).dialog("close");

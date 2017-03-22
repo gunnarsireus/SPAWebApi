@@ -8,5 +8,5 @@ ReactDOM.render(React.createElement("div", null,
     React.createElement(alert_1.DangerAlert, { text: "OMG, this is dangerous!!!" }),
     React.createElement("div", { id: "divDialog" }, "XXX"),
     React.createElement(well_1.Well, { text: "Well well well..." })), document.getElementById("body"));
-ReactDOM.render(React.createElement(alert_1.Alert, { text: "Dialog-alert" }), document.getElementById("divDialog"));
+ReactDOM.render(React.createElement(alert_1.Alert, { text: "Message from jquery-ui Dialog" }), document.getElementById("divDialog"));
 //# sourceMappingURL=index.js.map

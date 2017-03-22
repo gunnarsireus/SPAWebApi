@@ -11,4 +11,4 @@ ReactDOM.render(
     </div>,
     document.getElementById("body")
 );
-ReactDOM.render(<Alert text="Dialog-alert" />, document.getElementById("divDialog"));
+ReactDOM.render(<Alert text="Message from jquery-ui Dialog" />, document.getElementById("divDialog"));

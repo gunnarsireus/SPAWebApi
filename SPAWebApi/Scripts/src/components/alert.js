@@ -66,7 +66,7 @@ var DialogAlert = (function (_super) {
         var node = ReactDOM.findDOMNode(this);
         var dialog = $(node).dialog({
             modal: true,
-            title: 'Felmeddelande:',
+            title: 'Message:',
             buttons: {
                 Ok: function () {
                     $(this).dialog("close");
