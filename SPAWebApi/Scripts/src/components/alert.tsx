@@ -3,7 +3,6 @@ import * as ReactDOM from "react-dom";
 import * as $ from "jquery";
 import '../../jquery-ui.js';
 import '../../jquery-ui.css';
-import "node_modules/jquery-ui/themes/base/dialog.css"; 
 
 export interface IAlertProp {
     text: string;

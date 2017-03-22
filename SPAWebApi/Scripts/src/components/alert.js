@@ -15,7 +15,6 @@ var ReactDOM = require("react-dom");
 var $ = require("jquery");
 require("../../jquery-ui.js");
 require("../../jquery-ui.css");
-require("node_modules/jquery-ui/themes/base/dialog.css"); /* explicit relative path */
 var DangerAlert = (function (_super) {
     __extends(DangerAlert, _super);
     function DangerAlert(props) {
