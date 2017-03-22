@@ -1,7 +1,7 @@
 ﻿import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { DangerAlert,Alert } from "./components/alert";
-import { Well } from "./components/well";
+import { DangerAlert,Alert } from "./src/components/alert";
+import { Well } from "./src/components/well";
 
 ReactDOM.render(
     <div>

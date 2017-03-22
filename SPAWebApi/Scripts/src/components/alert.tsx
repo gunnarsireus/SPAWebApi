@@ -1,7 +1,9 @@
 ﻿import * as React from "react";
 import * as ReactDOM from "react-dom";
 import * as $ from "jquery";
-import "../node_modules/jquery-ui/themes/base/jquery-ui.css";
+import '../../jquery-ui.js';
+import '../../jquery-ui.css';
+import "node_modules/jquery-ui/themes/base/dialog.css"; 
 
 export interface IAlertProp {
     text: string;
@@ -9,8 +11,6 @@ export interface IAlertProp {
 
 export interface IDialogProp {
     open?: boolean;
-    node?: Element;
-    dialog?: JQueryUI.DialogOptions;
     onClose?: () => void;
     title?: string;
 }
@@ -57,8 +57,8 @@ export class DialogAlert extends React.Component<IDialogProp, {}> {
     }
     componentDidMount() {
         // 2) do DOM lib stuff
-        this.props.node = ReactDOM.findDOMNode(this);
-        this.props.dialog = $(this.props.node).dialog({
+        var node: Element = ReactDOM.findDOMNode(this);
+        var dialog: JQueryUI.Dialog = $(node).dialog({
             modal: true,
             title: 'Felmeddelande:',
             buttons: {
@@ -69,15 +69,15 @@ export class DialogAlert extends React.Component<IDialogProp, {}> {
         }).data('ui-dialog');
 
         // 3) call method to reconnect React's rendering
-        this.renderDialogContent(null);
+        this.renderDialogContent(null, node, dialog);
     };
 
-    componentWillReceiveProps(newProps: IDialogProp) {
+    componentWillReceiveProps(newProps: IDialogProp, node: Element, dialog: JQueryUI.Dialog) {
         // 4) render reconnected tree when props change
-        this.renderDialogContent(newProps);
+        this.renderDialogContent(newProps, node, dialog);
     };
 
-    renderDialogContent(props: IDialogProp) {
+    renderDialogContent(props: IDialogProp, node: Element, dialog: JQueryUI.Dialog) {
         // decide to use newProps from `componentWillReceiveProps` or to use
         // existing props from `componentDidMount`
         props = props || this.props;
@@ -85,13 +85,13 @@ export class DialogAlert extends React.Component<IDialogProp, {}> {
         // 5) make a new rendering tree, we've now hidden the DOM
         //    manipulation from jQuery UI dialog and then continued
         //    rendering with React
-        ReactDOM.render(<div>{this.props.children}</div>, this.props.node);
+        ReactDOM.render(<div>{this.props.children}</div>, node);
 
         // 6) Call methods on the DOM lib via prop changes
-        if (props.open)
-            this.props.dialog.open;
+        if (this.props.open)
+            dialog.open;
         else
-            this.props.dialog.close;
+            dialog.close;
     };
 
     componentWillUnmount() {

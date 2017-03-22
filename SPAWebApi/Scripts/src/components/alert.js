@@ -1,21 +1,29 @@
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
 var React = require("react");
 var ReactDOM = require("react-dom");
 var $ = require("jquery");
-require("../node_modules/jquery-ui/themes/base/jquery-ui.css");
+require("../../jquery-ui.js");
+require("../../jquery-ui.css");
+require("node_modules/jquery-ui/themes/base/dialog.css"); /* explicit relative path */
 var DangerAlert = (function (_super) {
     __extends(DangerAlert, _super);
     function DangerAlert(props) {
-        _super.call(this, props);
+        return _super.call(this, props) || this;
     }
     ;
     DangerAlert.prototype.render = function () {
-        return React.createElement("div", {className: "alert alert-danger"}, this.props.text);
+        return React.createElement("div", { className: "alert alert-danger" }, this.props.text);
     };
     return DangerAlert;
 }(React.Component));
@@ -23,11 +31,11 @@ exports.DangerAlert = DangerAlert;
 var SuccessAlert = (function (_super) {
     __extends(SuccessAlert, _super);
     function SuccessAlert(props) {
-        _super.call(this, props);
+        return _super.call(this, props) || this;
     }
     ;
     SuccessAlert.prototype.render = function () {
-        return React.createElement("div", {className: "alert alert-success"}, this.props.text);
+        return React.createElement("div", { className: "alert alert-success" }, this.props.text);
     };
     return SuccessAlert;
 }(React.Component));
@@ -35,11 +43,12 @@ exports.SuccessAlert = SuccessAlert;
 var Alert = (function (_super) {
     __extends(Alert, _super);
     function Alert(props) {
-        _super.call(this, props);
+        return _super.call(this, props) || this;
     }
     ;
     Alert.prototype.render = function () {
-        return (React.createElement(DialogAlert, null, React.createElement("p", null, this.props.text)));
+        return (React.createElement(DialogAlert, null,
+            React.createElement("p", null, this.props.text)));
     };
     return Alert;
 }(React.Component));
@@ -48,7 +57,7 @@ exports.Alert = Alert;
 var DialogAlert = (function (_super) {
     __extends(DialogAlert, _super);
     function DialogAlert(props) {
-        _super.call(this, props);
+        return _super.call(this, props) || this;
     }
     ;
     DialogAlert.prototype.render = function () {
@@ -56,8 +65,8 @@ var DialogAlert = (function (_super) {
     };
     DialogAlert.prototype.componentDidMount = function () {
         // 2) do DOM lib stuff
-        this.props.node = ReactDOM.findDOMNode(this);
-        this.props.dialog = $(this.props.node).dialog({
+        var node = ReactDOM.findDOMNode(this);
+        var dialog = $(node).dialog({
             modal: true,
             title: 'Felmeddelande:',
             buttons: {
@@ -67,27 +76,27 @@ var DialogAlert = (function (_super) {
             }
         }).data('ui-dialog');
         // 3) call method to reconnect React's rendering
-        this.renderDialogContent(null);
+        this.renderDialogContent(null, node, dialog);
     };
     ;
-    DialogAlert.prototype.componentWillReceiveProps = function (newProps) {
+    DialogAlert.prototype.componentWillReceiveProps = function (newProps, node, dialog) {
         // 4) render reconnected tree when props change
-        this.renderDialogContent(newProps);
+        this.renderDialogContent(newProps, node, dialog);
     };
     ;
-    DialogAlert.prototype.renderDialogContent = function (props) {
+    DialogAlert.prototype.renderDialogContent = function (props, node, dialog) {
         // decide to use newProps from `componentWillReceiveProps` or to use
         // existing props from `componentDidMount`
         props = props || this.props;
         // 5) make a new rendering tree, we've now hidden the DOM
         //    manipulation from jQuery UI dialog and then continued
         //    rendering with React
-        ReactDOM.render(React.createElement("div", null, this.props.children), this.props.node);
+        ReactDOM.render(React.createElement("div", null, this.props.children), node);
         // 6) Call methods on the DOM lib via prop changes
-        if (props.open)
-            this.props.dialog.open;
+        if (this.props.open)
+            dialog.open;
         else
-            this.props.dialog.close;
+            dialog.close;
     };
     ;
     DialogAlert.prototype.componentWillUnmount = function () {
